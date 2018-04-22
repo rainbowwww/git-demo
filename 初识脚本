@@ -1,0 +1,24 @@
+1.什么是脚本
+>电脑的剧本。
+>如下所示：
+
+`cd ~/Desktop
+ mkdir demo
+ cd demo
+ echo "hi" > index.html
+`cd ~/Desktop
+2.如何创建脚本
+***
+    *创建一个文件
+         `mkdir ~/local
+          cd ~/local
+          touch demo.txt`
+    *编辑文件
+        `mkdir demo
+         cd demo
+         mkdir css js
+         touch index.html css/style.css js/main.js
+         exit`
+    *windows用户执行
+        `sh ~/local/demo.txt`
+         即可运行此脚本了。
