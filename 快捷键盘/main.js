@@ -1,20 +1,20 @@
-/**
+ï»¿/**
  * Created by xu on 2018/5/30.
  */
 
-//    1. ³õÊ¼»¯Êı¾İ
+//    1.åˆå§‹åŒ–æ•°æ®
 var hashA = init();
 var keys = hashA['keys'];
 var hash = hashA['hash'];
 
-//    2.Éú³É¼üÅÌ
+//    2.ç”Ÿæˆé”®ç›˜
 generateKeyBody(keys,hash) ;
-//    3.¼àÌı¼üÅÌ
+//    3.ç›‘å¬ç”¨æˆ·åŠ¨ä½œ
 listenToKeyboard(hash)
 
 
 
-
+//ä¸‹é¢ä¸ºå·¥å…·å‡½æ•°
 function init(){
     var keys = {
         '0': {0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10} ,
@@ -51,7 +51,6 @@ function init(){
 function generateKeyBody(keys,hash){
     for(var index=0;index<keys['length'];index=index+1){
         var div = tag('div',{'className':'row'});
-
         y.appendChild(div);
 
         var row = keys[index];
@@ -98,13 +97,13 @@ function creatSpan(textContent){
 function creatButton(id){
     var button= tag('button');
     button.id = id;
-    button.textContent ='±à¼­';
+    button.textContent ='ç¼–è¾‘';
     button.onclick = function(ll){
         var button2 = ll['target'];
         var img2 = button2.nextSibling;
         console.log(img2);
         var key=button2['id'];
-        var x=prompt('¸øÎÒÒ»¸öÍøÖ·');
+        var x=prompt('è¯·è¾“å…¥ç½‘å€');
         hash[key] = x;
         img2.src= 'http://'+hash[row[index2]]+'/favicon.ico';
         localStorage.setItem('zzz',JSON.stringify(hash));
