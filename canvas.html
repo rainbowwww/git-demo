@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+       body{
+           margin:0;
+           padding:0;
+       }
+       .action{
+           position: fixed;
+           left: 0;
+           bottom: 0;
+       }
+       .action.x>#brush{
+           display:inline-block;
+       }
+       .action>#brush{
+           display: none;
+       }
+       .action.x>#eraser{
+           display:none;
+       }
+    </style>
+</head>
+<body>
+    <canvas id="xxx" width="700px" height="700px" style="background: pink; display: block;">  </canvas>
+    <div class="action" id="action">
+        <button id="eraser">橡皮檫</button>
+        <button id="brush">画笔</button>
+    </div>
+    
+</body>
+<script>
+    // 变量声明
+    var yyy =document.getElementById('xxx');
+    var context = yyy.getContext('2d');
+    var using  = false;
+    var eraserEnabled = false;
+    var lastpoint = {x:'underfined',y:'underfined'};
+   //  设置画板大小
+    setAutocanvas(yyy);
+   
+   // 监听鼠标事件   
+    listenToMouse(yyy);
+   
+    // context.fillStyle = 'orange';
+    // context.fillRect(0,0,100,100);
+    // context.strokeStyle='red';
+    // context.strokeRect(0,0,100,100);
+    // context.clearRect(50,50,10,10);
+
+    // context.fillStyle = 'red';
+    // context.beginPath();
+    // context.moveTo(240,240);
+    // context.lineTo(300,240);
+    // context.lineTo(300,300);
+    // context.fill();
+
+   
+   
+
+   
+   
+    eraser.onclick = function(){
+        eraserEnabled = true;
+        action.className = 'action x';
+    }
+    brush.onclick = function(){
+        eraserEnabled = false;
+        action.className = 'action';
+    }
+
+
+
+
+/*调用的函数*/
+function setAutocanvas(canvas){
+        setCanvasSize();
+    window.onresize= function(){
+        setCanvasSize();
+    }
+    function setCanvasSize(){
+        var pageWidth = document.documentElement.clientWidth;
+        var pageHeight = document.documentElement.clientHeight; 
+        canvas.width = pageWidth;
+        canvas.height = pageHeight;
+    }
+    }
+
+
+function listenToMouse(canvas){
+    canvas.onmousedown  = function(a){
+        
+        var x = a.clientX;
+        var y = a.clientY;
+        using = true
+        // drawCircle(x,y,1);
+        if(eraserEnabled){
+            context.clearRect(x-5,y-5,10,10);
+        }else{
+            lastpoint = {'x':x,'y':y};
+            console.log(x,y);
+        }
+    }
+    canvas.onmousemove = function(a){
+        var x = a.clientX;
+         var y = a.clientY;
+         if(!using){return};
+        if(eraserEnabled){
+            
+                context.clearRect(x-5,y-5,10,10);
+            
+            
+        }else{
+            var newpoint = {'x':x,'y':y};
+            // drawCircle(x,y,1);
+            line(lastpoint.x,lastpoint.y,newpoint.x,newpoint.y);
+            lastpoint = newpoint;
+           
+        }
+        
+       
+    }
+    canvas.onmouseup = function(){
+       using = false;
+    }
+//     drawCircle(150,150,20)
+    function drawCircle(x,y,radius){
+    context.beginPath();
+    context.arc(x,y,radius,0,Math.PI*2);
+    context.fill();
+    }
+ 
+    function line(x1,y1,x2,y2){
+        context.beginPath();
+    context.moveTo(x1,y1);
+    context.lineWidth = 5;
+    context.lineTo(x2,y2);
+    context.stroke();
+    context.closePath();
+    }
+   }
+</script>
+</html>
