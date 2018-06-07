@@ -2,8 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"/>
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
        body{
@@ -27,7 +29,7 @@
     </style>
 </head>
 <body>
-    <canvas id="xxx" width="700px" height="700px" style="background: pink; display: block;">  </canvas>
+    <canvas id="xxx"  style="background: pink; display: block;">  </canvas>
     <div class="action" id="action">
         <button id="eraser">橡皮檫</button>
         <button id="brush">画笔</button>
@@ -40,11 +42,12 @@
     var context = yyy.getContext('2d');
     var using  = false;
     var eraserEnabled = false;
-    var lastpoint = {x:'underfined',y:'underfined'};
+    var lastpoint = {x: undefined ,y: undefined };
    //  设置画板大小
     setAutocanvas(yyy);
    
    // 监听鼠标事件   
+
     listenToMouse(yyy);
    
     // context.fillStyle = 'orange';
@@ -93,7 +96,47 @@ function setAutocanvas(canvas){
 
 
 function listenToMouse(canvas){
-    canvas.onmousedown  = function(a){
+    if(document.body.ontouchstart !== undefined){
+        // console.log(canvas);
+        canvas.ontouchstart  = function(a){
+            var x = a.touches[0].clientX;
+            var y = a.touches[0].clientY;
+           
+            using = true
+            // drawCircle(x,y,1);
+            if(eraserEnabled){
+                context.clearRect(x-5,y-5,10,10);
+            }else{
+                lastpoint = {'x':x,'y':y};
+            }
+        }
+        canvas.ontouchmove = function(a){
+            
+            var x = a.touches[0].clientX;
+            var y = a.touches[0].clientY;
+            if(!using){return};
+            if(eraserEnabled){
+                
+                    context.clearRect(x-5,y-5,10,10);
+                
+                
+            }else{
+                var newpoint = {'x':x,'y':y};
+                // drawCircle(x,y,1);
+                line(lastpoint.x,lastpoint.y,newpoint.x,newpoint.y);
+                lastpoint = newpoint;
+            
+            }
+            
+        
+        }
+        canvas.ontouchend = function(){
+        using = false;
+        }
+    //     drawCircle(150,150,20)
+
+    }else{
+        canvas.onmousedown  = function(a){
         
         var x = a.clientX;
         var y = a.clientY;
@@ -129,6 +172,9 @@ function listenToMouse(canvas){
        using = false;
     }
 //     drawCircle(150,150,20)
+   
+    }
+   
     function drawCircle(x,y,radius){
     context.beginPath();
     context.arc(x,y,radius,0,Math.PI*2);
@@ -142,7 +188,7 @@ function listenToMouse(canvas){
     context.lineTo(x2,y2);
     context.stroke();
     context.closePath();
-    }
+    } 
    }
 </script>
 </html>
