@@ -1,0 +1,125 @@
+### 任意类型转字符串
+1. 数字类型转为字符串
+* toString方法:
+```
+var n=1;
+n.toString();//"1"
+```
+
+* 数字类型+''
+```
+1+''
+// '1'
+```
+* 
+2. 布尔类型转为字符串
+* toString方法：
+```
+var b =true
+b.toString(); //"true"
+```
+* 布尔类型+''
+```
+true+'';
+//'true'
+```
+3. null类型转为字符串
+* toString方法：
+```
+var n= null;
+n.toString();
+//报错Cannot read property 'toString' of null
+```
+* null类型+''
+```
+null+'';
+'null'
+```
+
+4. undefined类型转为字符串
+* toString方法：
+```
+var u = undefined;
+u.toString();
+//报错Cannot read property 'toString' of undefined
+```
+* undefined类型+''
+```
+undefined+''
+//'underfined'
+5. object类型转为字符串
+* toString方法：
+```
+var o = {'name':'xxx'};
+o.toString();
+//"[object Object]"  不能打印出来所写的对象内容
+```
+* object类型+''
+```
+var o = {'name':'xxx'};
+o+'';
+//"[object Object]"
+```
+consol.log就是使用了toString这样的原理，括号里面理论上只能接字符串,里面内容自动转为字符串。
+6. symbol暂不涉及
+
+7. 还有一种全局方法String(x)
+效果如图
+![string方法](https://video.jirengu.com/FrpnWPAjH4_Zh1Ru58nEIC0I4onn) 
+### 任意类型转布尔
+1. Boolean(x)
+
+2.!!x
+
+3.有五种特殊值变成Boolean是false
+* number类型里面有两个布尔值是false ： NAN和0
+* string类型里面一个布尔值是false： ''空字符串
+* null类型就一个null是false
+* undefined类型就一个undefined是false
+* 所有的对象都是true
+
+### 任意类型转number
+1. number()方法
+2. parseInt() 全局函数方法，遇到不能解析的值便返回。
+3. 想转小数的话parseFloat()
+4. 任意类型-0,即有parseInt功能既有parseFloat功能
+5.类型前面写'+'即以数字形式取它原本的值
+###内存
+1. 你买一个8G的内存条
+2. 操作系统开机即占用512MB
+3. Chrome打开即占用1G内存
+4. Chrome各每个网页分配一定数量的内存
+5. 这些内存要分给页面渲染器、网络模块、浏览器外壳和JS引擎（V8引擎）
+6. JS引擎将内存分为代码区和数据区
+7. 我们只研究数据区
+8. 数据区分为Stack（栈内存）和Heap（堆内存）
+9. 简单类型的数据直接存在Stack里
+10. 复杂类型的数据是把Heap地址存在Stack里
+
+### 深复制和浅复制
+```
+var a = 1
+var b = a
+b = 2 //这个时候改变 b
+a 完全不受 b 的影响
+那么我们就说这是一个深复制
+```
+对于简单类型的数据来说，赋值就是深拷贝。
+对于复杂类型的数据（对象）来说，才要区分浅拷贝和深拷贝。
+
+这是一个浅拷贝的例子
+```
+var a = {name: 'frank'}
+var b = a
+b.name = 'b'
+a.name === 'b' // true
+```
+因为我们对 b 操作后，a 也变了
+
+什么是深拷贝了，就是对 Heap 内存进行完全的拷贝。
+```
+var a = {name: 'frank'}
+var b = deepClone(a) // deepClone 还不知道怎么实现
+b.name = 'b'
+a.name === 'a' // true
+```
