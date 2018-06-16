@@ -1,0 +1,59 @@
+### 全局对象 window
+ECMAScript 规定全局对象叫做 global，但是浏览器把 window 作为全局对象（浏览器先存在的）
+
+window 就是一个哈希表，有很多属性。
+
+window 的属性就是全局变量。
+
+这些全局变量分为两种：
+1. 一种是 ECMAScript 规定的
+* global.parseInt
+* global.parseFloat
+* global.Number
+* global.String
+* global.Boolean
+* global.Object
+2. 一种是浏览器自己加的属性
+* window.alert
+* window.prompt
+* window.comfirm
+* window.console.log
+* window.console.dir
+* window.document
+* window.document.createElement
+* window.document.getElementById
+写代码的时候window可以不写。
+###简单类型与对象的区别
+var n1 = 1 与 var n2 = new Number(1);内存不同。基本类型没有属性的，但是有个暂时转换的功能
+
+var s1 = x 与 var s2 = new String('x');
+
+var o1 = {} 与 var o2 = new Object() ;两者完全没有区别，但不但表两个是相等的地址是不一样的。请看内存图
+
+
+
+字符串的一些小操作
+```
+var s  = 'wawj' ;
+s.charAt(0);//获取的是索引所对应的字符；
+s.charcodeAt(0);//获取索引所对应字符的Unicode编码；
+(100).toString(16)//获取数字为100的16进制数。
+'    username      '.trim  去除两边的空格
+var s1 = 'hello'
+var s2 = 'world'
+s1.contact(s2)  // 'helloworld' 得到的第三的字符串，跟命令行中的cat命令有关系  
+s1.slice(0,2); //'he'  从索引0到2，包前不包后。
+s1.replace(e,o); // 'hollo'  替换
+```
+### 公共属性
+
+```
+o1.toString ===o2.toString  //true  toString是公共属性所以有相同的存储地址
+```
+object 的属性是所有对象的共有属性
+共有属性是个hash如果没有被引用的话被就被要被垃圾回收掉，object.prototype 在引用，prototype是object的共有属性(原型)。
+```
+var o1 = {}
+o1.__proto__ ===object.prototype 
+ //true
+```
