@@ -6,11 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>徐彩虹个人简历</title>
     <!-- <script src="//at.alicdn.com/t/font_663626_2jbqse44njowp14i.js"></script> -->
+    
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_663626_vnrtjp8f09bb7qfr.css">
     <style>
         body,p,h1,h2,h3,ul,li,ol,dl,dt,dd{
             margin: 0px;
             padding: 0px;
+            list-style: none;
         }
         body{
             background-color: rgb(239, 239, 239);
@@ -28,10 +30,64 @@
             color: white;
             
         }
+        .loading{
+            height:100px;
+            width:100px;
+            position:relative;
+        }
+        .loading::before,.loading::after{
+            content:"";
+            position:absolute;
+            top:0;
+            left:0;
+            bottom:0;
+            right:0;
+            height:0px;
+            width:0px;
+            border-radius:50%;
+            background-color:black;
+            margin:auto;
+            animation:bubble 1.5s linear infinite;
+        }
+        .loading::after{
+            animation-delay:0.75s;
+            }
+            @keyframes bubble{
+            0%{
+            width:0px; height:0px;opacity:1;
+            }
+            100%{
+            width:100px;height:100px; opacity:0;
+            }
+        }
+        .welcomeResume{
+            display: none;
+            position:fixed;
+            top:0;
+            left: 0;
+            width:100%;
+            height: 100%;
+            background: #888;
+            z-index: 1;
+            justify-content: center;
+            align-items: center;
+        }
+        .welcomeResume.active{
+            display: flex;
+        }
         .topNavBar{
             padding: 25px 0px 25px 0px ;
             position: fixed;
             width: 100%;
+            transition: all,1.5s;
+            color:#b7b7b7;
+        }
+        .topNavBar.sticky{
+            background-color: white;
+            padding:10px 0;
+            z-index: 1;
+            box-shadow: 0 0  10px rgba(0, 0, 0, 0.25);
+            color: #3d4451;
         }
         .topNavBar>section {
           padding-right: 25px;
@@ -57,17 +113,66 @@
         .topNavBar>section>nav>ul>li{
             padding-left: 34px ;
             float: left;
+            position:relative;
         }
         .topNavBar>section>nav>ul>li>a{
             font-size: 12px;
-            color:#b7b7b7;
+            color: inherit;
             font-weight: 700;
             padding-bottom: 5px;
             padding-top: 5px;
             display: inline-block;
+            position: relative;
         }
-        .topNavBar>section>nav>ul>li>a:hover{
+        .topNavBar .subMenu{
+            display: none;
+            position:absolute;
+           left:0;
+            top:120%;
+            background-color:white;
+            color: #3d4451;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .topNavBar li.active>.subMenu{
+            display:block;
+            animation: subMenuSlide 0.3s;
+        }
+        @keyframes subMenuSlide{
+            0%{
+               margin-right: 100%;
+            }
+            100%{
+                margin-right: 0%;
+            }
+        }
+        .topNavBar .subMenu>li{
+            white-space: nowrap;
+            padding: 5px 10px;
+         
+        }
+        /* .topNavBar>section>nav>ul>li>a:hover{
+        
             border-bottom: 3px solid #e06567;
+        } */
+        .topNavBar>section>nav>ul>li.active>a::after{
+            display: block;
+            content:"";
+            position:absolute;
+            top:100%;
+            left:0;
+            width: 100%;
+            background-color: #e06567;
+            height:3px;
+            animation: slideBar 0.3s;
+        }
+        @keyframes slideBar{
+            0%{
+               width: 0;
+            }
+            100%{
+               width: 100%;
+               
+            }
         }
         .banner{
             background-image: url(./img/rs-cover.jpg);
@@ -359,26 +464,40 @@
     </style>
 </head>
 <body>
-    <div class="topNavBar clearfix">
+    <div id='welcomeResume' class="welcomeResume active">
+        <div class='loading'> </div>
+    </div>
+    
+    <div id='topNavBar'class="topNavBar clearfix ">
         <section>
             <a href="#" style="float: left;">
                 <span class="RS">RS</span> 
                 <span class="font">card</span>
             </a>
 
-            <nav class="clearfix" style="float: right;">
+            <nav class="clearfix menu" style="float: right;">
                 <ul class="clearfix">
                     <li>
-                        <a href="">关于</a>
+                        <a href="#siteAbout">关于</a>
                     </li>
                     <li>
-                        <a href="">技能</a>
+                        <a href="#siteSkill">技能</a>
                     </li>
-                    <li>
-                        <a href="">作品</a>
+                    <li >
+                        <a href="#siteProduct" >作品</a>
+                        <ul class="subMenu">
+                            <li>作品1</li>
+                            <li>作品2</li>
+                            <li>作品3</li>
+                        </ul>
                     </li>
-                    <li>
-                        <a href="">博客</a>
+                    <li >
+                        <a href="" >博客</a>
+                        <ul class="subMenu">
+                            <li>博客1</li>
+                            <li>博客2</li>
+                            <li>博客3</li>
+                        </ul>
                     </li>
                     <li>
                         <a href="">日历</a>
@@ -397,7 +516,7 @@
         <div class="mask"></div>
     </div>
     <main>
-        <div class="usercard">
+        <div class="usercard" id="siteAbout">
             <div class="card clearfix">
                 <div class="headPic">
                     <img src="./img/avatar.jpg" alt="头像">
@@ -436,7 +555,7 @@
         </p>
     </section>
 
-    <section class="skill">
+    <section class="skill" id="siteSkill">
         <h2>技能</h2>
         <nav>
             <ol>
@@ -468,7 +587,7 @@
         </nav>
     </section>
 
-    <section class="work">
+    <section class="work" id="siteProduct">
        <h2>作品集</h2> 
        <nav>
            <ol class="clearfix">
@@ -488,7 +607,8 @@
        </div>
     </section>
 
-    <script>  
+    <script> 
+       
         portfolio1.onclick= function(){
             smallBar.className = 'state1 smallBar1'
           }
@@ -498,7 +618,45 @@
           portfolio3.onclick= function(){
             smallBar.className = 'state3 smallBar1'
           }
+          
+        window.onscroll = function(){
+            if(window.scrollY>0){
+                topNavBar.classList.add('sticky')
+            }else{
+                topNavBar.classList.remove('sticky')
+            }
+        }
 
+        let liTags = document.querySelectorAll('nav.menu>ul>li')
+        for(let i=0; i<liTags.length;i++){
+            liTags[i].onmouseenter = function(x){
+                // currentTarget 监听的事件操作
+                x.currentTarget.classList.add('active');
+          
+            }
+            liTags[i].onmouseleave = function(x){
+              
+                x.currentTarget.classList.remove('active');
+            }
+        }
+        let aTags = document.querySelectorAll('nav.menu>ul>li>a');
+        for(let i =0; i<aTags.length;i++){
+            aTags[i].onclick=function(x){
+                x.preventDefault(); //阻值默认动作
+                let a = x.currentTarget ;
+               let href =  a.getAttribute('href');  //得到什么，就是什么不做任何处理。浏览器不会处理
+               let element = document.querySelector(href);//以获取的href值，来找到对应的元素
+               let top = element.offsetTop;//获取元素到窗口顶部的高度
+               window.scrollTo(0,top-80);
+                // console.log(a.href); //这个打印出来带有http协议，浏览器处理后的
+                // console.log('you click');
+                // console.log(x.currentTarget);
+            }
+        }
+    </script>
+    <script>
+        setTimeout(function(){welcomeResume.classList.remove('active')},100)
+        
     </script>
 </body>
 </html>
