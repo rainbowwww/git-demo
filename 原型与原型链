@@ -47,6 +47,14 @@ s1.replace(e,o); // 'hollo'  替换
 ```
 ### 公共属性
 
+所有对象都有 toString 和 valueOf 属性，那么我们是否有必要给每个对象一个 toString 和 valueOf 呢？
+
+明显不需要。
+
+JS 的做法是把 toString 和 valueOf 放在一个对象里（暂且叫做公用属性组成的对象）
+
+然后让每一个对象的 __proto__ 存储这个「公用属性组成的对象」的地址。
+
 ```
 o1.toString ===o2.toString  //true  toString是公共属性所以有相同的存储地址
 ```
@@ -57,3 +65,11 @@ var o1 = {}
 o1.__proto__ ===object.prototype 
  //true
 ```
+
+### 重要公式
+对象是由构造函数构成所以请看下面公式
+```
+var 对象 = new 函数()
+对象.__proto__ === 函数.prototype
+```
+
