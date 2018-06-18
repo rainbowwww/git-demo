@@ -8,6 +8,7 @@
     <!-- <script src="//at.alicdn.com/t/font_663626_2jbqse44njowp14i.js"></script> -->
     
     <link rel="stylesheet" href="http://at.alicdn.com/t/font_663626_vnrtjp8f09bb7qfr.css">
+    
     <style>
         body,p,h1,h2,h3,ul,li,ol,dl,dt,dd{
             margin: 0px;
@@ -74,6 +75,16 @@
         }
         .welcomeResume.active{
             display: flex;
+        }
+        [data-x].active{
+            outline: 10px solid red;
+        }
+        [data-x].offset{
+            transform: translateY(100px);
+        }
+        [data-x]{
+            transform: translateY(0);
+            transition: all 0.5s;
         }
         .topNavBar{
             padding: 25px 0px 25px 0px ;
@@ -154,7 +165,8 @@
         
             border-bottom: 3px solid #e06567;
         } */
-        .topNavBar>section>nav>ul>li.active>a::after{
+        .topNavBar>section>nav>ul>li.active>a::after,
+        .topNavBar>section>nav>ul>li.heightLight>a::after{
             display: block;
             content:"";
             position:absolute;
@@ -314,7 +326,6 @@
             list-style: none;
             padding: 42px 50px 10px;
             background:#fff;
-
         }
         .skill>nav>ol>li{
             display: inline-block;
@@ -337,66 +348,57 @@
             font-weight: normal;
 
         }
-        .skill>nav>ol>.progressOne>div{
+        
+        .skill>nav>ol>li .progressOut{
             background-color:  #FAE1E1;
             border-radius: 5px ;
-            margin: 5px 0  38px 0;
+            margin: 5px 0  40px 0;
+        }
+        .skill .progressBar{
+            overflow: hidden;
+        }
+        .skill .progressIn{
+            transform: translateX(0);
+            transition: all 1s;
+        }
+        .skill.offset .progressIn{
+            transform: translateX(-100%);
         }
         .skill>nav>ol>.progressOne>div>div{
             border:3px solid rgb(230, 104, 106);
             width: 70%;
             border-radius: 5px ;
         }
-        .skill>nav>ol>.progressTwo>div{
-            background-color:  #FAE1E1;
-            border-radius: 5px ;
-            margin: 5px 0  40px 0;
-        }
+      
         .skill>nav>ol>.progressTwo>div>div{
             border:3px solid rgb(230, 104, 106);
             width: 90%;
             border-radius: 5px ;
         }
-        .skill>nav>ol>.progressThree>div{
-            background-color:  #FAE1E1;
-            border-radius: 5px ;
-            margin: 5px 0  40px 0;
-        }
+        
         .skill>nav>ol>.progressThree>div>div{
             border:3px solid rgb(230, 104, 106);
             width: 30%;
             border-radius: 5px ;
         }
-        .skill>nav>ol>.progressFour>div{
-            background-color:  #FAE1E1;
-            border-radius: 5px ;
-            margin: 5px 0  40px 0;
-        }
+        
         .skill>nav>ol>.progressFour>div>div{
             border:3px solid rgb(230, 104, 106);
             width: 80%;
             border-radius: 5px ;
         }
-        .skill>nav>ol>.progressFive>div{
-            background-color:  #FAE1E1;
-            border-radius: 5px ;
-            margin: 5px 0  40px 0;
-        }
+        
         .skill>nav>ol>.progressFive>div>div{
             border:3px solid rgb(230, 104, 106);
             width: 60%;
             border-radius: 5px ;
-        }
-        .skill>nav>ol>.progressSix>div{
-            background-color:  #FAE1E1;
-            border-radius: 5px ;
-            margin: 5px 0  40px 0;
         }
         .skill>nav>ol>.progressSix>div>div{
             border:3px solid rgb(230, 104, 106);
             width: 50%;
             border-radius: 5px ;
         }
+
         .work{
             margin: 0 auto ;
             margin-top: 60px;
@@ -516,7 +518,7 @@
         <div class="mask"></div>
     </div>
     <main>
-        <div class="usercard" id="siteAbout">
+        <div data-x class="usercard" id="siteAbout">
             <div class="card clearfix">
                 <div class="headPic">
                     <img src="./img/avatar.jpg" alt="头像">
@@ -555,39 +557,39 @@
         </p>
     </section>
 
-    <section class="skill" id="siteSkill">
+    <section   data-x class="skill" id="siteSkill">
         <h2>技能</h2>
         <nav>
             <ol>
-                <li class="progressOne">
+                <li class="progressOne progressBar">
                     <h3>HTML 5 &amp; CSS 3</h3>
-                    <div><div></div></div>
+                    <div class="progressOut"><div class="progressIn"></div></div>
                 </li>
-                <li class="progressTwo">
+                <li class="progressTwo progressBar">
                     <h3>JavaScript</h3>
-                    <div><div></div></div>
+                    <div class="progressOut"><div class="progressIn"></div></div>
                 </li>
-                <li class="progressThree">
+                <li class="progressThree progressBar">
                     <h3>jQuery</h3>
-                    <div><div></div></div>
+                    <div class="progressOut"><div class="progressIn"></div></div>
                 </li>
-                <li class="progressFour">
+                <li class="progressFour progressBar">
                     <h3>Vue</h3>
-                    <div><div></div></div>
+                    <div class="progressOut"><div class="progressIn"></div></div>
                 </li>
-                <li class="progressFive">
+                <li class="progressFive progressBar">
                     <h3>React</h3>
-                    <div><div></div></div>
+                    <div class="progressOut"><div class="progressIn"></div></div>
                 </li>
-                <li class="progressSix">
+                <li class="progressSix progressBar">
                     <h3>HTTP</h3>
-                    <div><div></div></div>
+                    <div class="progressOut"><div class="progressIn"></div></div>
                 </li>
             </ol>
         </nav>
     </section>
 
-    <section class="work" id="siteProduct">
+    <section  data-x class="work" id="siteProduct">
        <h2>作品集</h2> 
        <nav>
            <ol class="clearfix">
@@ -607,6 +609,7 @@
        </div>
     </section>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
     <script> 
        
         portfolio1.onclick= function(){
@@ -619,14 +622,42 @@
             smallBar.className = 'state3 smallBar1'
           }
           
-        window.onscroll = function(){
+          let specialTags = document.querySelectorAll('[data-x]');
+          for(let i =0;i<specialTags.length;i++){
+            specialTags[i].classList.add('offset');
+            }
+            
+        setTimeout(function(){closest()},100)
+        window.onscroll = function(x){
             if(window.scrollY>0){
                 topNavBar.classList.add('sticky')
             }else{
                 topNavBar.classList.remove('sticky')
             }
+            closest();
         }
-
+        function closest(){
+            let specialTags = document.querySelectorAll('[data-x]');
+            let minIndex = 0;
+            for(let i =1;i<specialTags.length;i++){
+               if(Math.abs(specialTags[i].offsetTop - window.scrollY)<Math.abs(specialTags[minIndex].offsetTop - window.scrollY) ){
+                   minIndex = i;
+               }
+            }
+            specialTags[minIndex].classList.remove('offset');
+        //     for(let i =0; i<specialTags.length;i++){
+        //         specialTags[i].classList.remove('active');
+        //     }
+        //    specialTags[minIndex].classList.add('active');
+           let id = specialTags[minIndex].id ;
+           let a = document.querySelector('a[href="#'+id +'"]');
+           var li = a.parentNode ;
+           var brotherAndMe = li.parentNode.children;
+           for(var i =0;i<brotherAndMe.length;i++){
+            brotherAndMe[i].classList.remove('heightLight');
+           }
+           li.classList.add('heightLight');
+        }
         let liTags = document.querySelectorAll('nav.menu>ul>li')
         for(let i=0; i<liTags.length;i++){
             liTags[i].onmouseenter = function(x){
@@ -640,17 +671,43 @@
             }
         }
         let aTags = document.querySelectorAll('nav.menu>ul>li>a');
+        
+        // Setup the animation loop.
+        function animate(time) {
+            requestAnimationFrame(animate);
+            TWEEN.update(time);
+        }
+        requestAnimationFrame(animate);
+
+       
+
+
         for(let i =0; i<aTags.length;i++){
             aTags[i].onclick=function(x){
                 x.preventDefault(); //阻值默认动作
-                let a = x.currentTarget ;
-               let href =  a.getAttribute('href');  //得到什么，就是什么不做任何处理。浏览器不会处理
-               let element = document.querySelector(href);//以获取的href值，来找到对应的元素
-               let top = element.offsetTop;//获取元素到窗口顶部的高度
-               window.scrollTo(0,top-80);
-                // console.log(a.href); //这个打印出来带有http协议，浏览器处理后的
-                // console.log('you click');
-                // console.log(x.currentTarget);
+            //     let a = x.currentTarget ;
+            //    let href =  a.getAttribute('href');  //得到什么，就是什么不做任何处理。浏览器不会处理
+            //    let element = document.querySelector(href);//以获取的href值，来找到对应的元素
+            //    let top = element.offsetTop;//获取元素到窗口顶部的高度
+            //上面四句合成下面一句
+            let top = document.querySelector(x.currentTarget.getAttribute('href')).offsetTop;
+            // window.scrollTo(0,top-80);
+            // console.log(a.href); //这个打印出来带有http协议，浏览器处理后的
+            // console.log(x.currentTarget);
+            
+            let currentTop = window.scrollY;
+            let targetTop= top-80;
+            var s = targetTop -currentTop;
+            var t =Math.abs((s/100)*300);
+            if(t>500){t=500;}
+            var coords = { y:currentTop}; 
+            var tween = new TWEEN.Tween(coords) 
+            .to({ y: targetTop }, t) 
+            .easing(TWEEN.Easing.Quadratic.InOut) 
+            .onUpdate(function() {
+                window.scrollTo(0,coords.y);
+            })
+            .start(); 
             }
         }
     </script>
