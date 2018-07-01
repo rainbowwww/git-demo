@@ -1,0 +1,70 @@
+### 封装一个函数
+```
+function getSiblings(node){
+    var allChildren =  node.parentNode.children;
+    var array = {length:0};
+    for(var i=0; i<allChildren.length;i++){
+        if(allChildren[i]!==node){
+            array[allChildren.length]=allChildren[i]
+            array.length +=1 ;
+        }
+        
+    }
+    return array
+ }
+
+function addClass(node,classes){
+     classes.forEach(value => {
+         node.classList.add(value);
+     });
+}
+
+```
+上面封装的函数很容易被别的同样名称的变量覆盖，因此需要改进。
+
+### 命名空间
+以防被同名称变量覆盖，可以用命名空间来进行调用函数
+```
+window.rainbowww  = {};
+rainbowww.getSiblings = function(){};
+rainbowww.addClass = function(){};
+rainbowww.getSiblings(node);
+rainbowww.addClass(node,classes);
+
+```
+### 能不能把 node 放在前面
+
+* 方法一
+直接调用Node的接口,也就是直接在Node的原型链上加函数
+```
+Node.prototype.getSiblings = function(){}
+Node.prototype.addClass = function(){}
+```
+* 方法二
+写一个新的接口 ，以防污染原有的原型链,jQuery的库就是这样写的。
+```
+window.jQuery = function(nodeOrSelect){
+    let nodes ={}
+    if(typeof nodeOrSelect===string ){
+         let temp = document.querySelectorAll(nodeOrSlect)
+         for(let i=0;i<nodeOrSelect.length;i++){
+            nodes[i] = temp[i]
+        }}else if(nodeOrSelect instanceof Node){
+            nodes={0:nodeOrSelect,length:1}}
+       
+    nodes.addClass = function(classes){
+        classes.forEach((value)=>{
+            for(let i=0; i<nodes.length;i++){
+                nodes[i].classList.add(value)
+            }
+        })
+    }
+    nodes.setText  = function(text){
+        for(let i=0; i<nodes.length; i++){
+            nodes[i].textContent = text
+        }
+    }
+    return nodes
+}
+
+```
