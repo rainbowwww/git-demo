@@ -7,47 +7,143 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+  
     <style>
-       body{
-           margin:0;
+       ul,ol{
+            list-style: none ;
+            margin:0;
            padding:0;
-       }
+           
+        }
+       /* *{
+            margin:0;
+           padding:0;
+        } */
+        body{
+            margin:0;
+           padding:0;
+            overflow: hidden;
+        }
+        .xxx{
+            position: absolute;
+            left: 0;
+            top:0;
+        }
+         .icon {
+       width:1em; height:1em;
+       vertical-align: -0.15em;
+       fill: currentColor;
+       overflow: hidden;
+         }
+
        .action{
            position: fixed;
            left: 0;
-           bottom: 0;
+           top: 0;
+           padding: 20px;
        }
-       .action.x>#brush{
-           display:inline-block;
-       }
-       .action>#brush{
-           display: none;
-       }
-       .action.x>#eraser{
-           display:none;
-       }
+      
+    .action svg {
+        width: 1.5em;
+        height: 1.5em;
+        margin: 0 5px;
+        transition: all 0.3s;
+    }
+    .action svg.active{
+        fill: red;
+         transform: scale(1.5);
+         
+    }
+    .colors{
+        position: fixed;
+        top: 110px;
+        left: 20px;
+        /* border: 1px solid orange; */
+    }
+    .colors>li{
+        width: 20px;
+        height: 20px;
+        border: 2px solid #aaa;
+        border-radius: 50%;
+        margin:10px 0;
+        transition: all 0.3s;
+    }
+    .colors li.active{
+        box-shadow:0 0 3px rgba(0, 0, 0, 0.95);
+        transform: scale(1.2);
+    }
+    .colors>.red{
+        background-color: red;
+    }
+    .colors>.green{
+        background-color: green;
+    }
+    .colors>.yellow{
+        background-color: yellow;
+    }
+    .sizes{
+        position: fixed;
+        right: 20px;
+        top: 10px;
+    }
+    .sizes>li{
+        margin: 20px 0;
+    }
+    .sizes>.thin{
+        height: 0;
+        width: 20px;
+        border-top:3px solid black;
+    }
+    .sizes>.thick{
+        height: 0;
+        width: 20px;
+        border-top:6px solid black;
+    }
     </style>
 </head>
 <body>
-    <canvas id="xxx"  style="background: pink; display: block;">  </canvas>
+    <canvas id="xxx"  style="background:pink; display: block;">  </canvas>
     <div class="action" id="action">
-        <button id="eraser">橡皮檫</button>
-        <button id="brush">画笔</button>
+        
+        <svg class="icon active" aria-hidden="true" id="pen">
+            <use xlink:href="#icon-pen1"></use>
+        </svg>
+        <svg class="icon" aria-hidden="true" id="eraser" >
+                <use xlink:href="#icon-eraser2"></use>
+            </svg>
+        <svg class="icon" aria-hidden="true" id="clear" >
+                <use xlink:href="#icon-clear"></use>
+            </svg>
+        
+        <svg class="icon" aria-hidden="true" id="download" >
+                <use xlink:href="#icon-Save"></use>
+            </svg>
     </div>
-    
+    <ol class="colors">
+        <li class="red" id="red"></li>
+        <li class="green" id="green"></li>
+        <li class="yellow" id="yellow"></li>
+    </ol>
+    <ol class="sizes">
+        <li class="thin" id="thin"></li>
+        <li class="thick" id="thick"></li>
+    </ol>
 </body>
 <script>
+    // document.body.ontouchstart = function(eee){
+    //     eee.preventDfault()
+    // }
     // 变量声明
     var yyy =document.getElementById('xxx');
     var context = yyy.getContext('2d');
     var using  = false;
     var eraserEnabled = false;
     var lastpoint = {x: undefined ,y: undefined };
+    var lineWidth = 5
    //  设置画板大小
     setAutocanvas(yyy);
    
    // 监听鼠标事件   
-
     listenToMouse(yyy);
    
     // context.fillStyle = 'orange';
@@ -55,31 +151,59 @@
     // context.strokeStyle='red';
     // context.strokeRect(0,0,100,100);
     // context.clearRect(50,50,10,10);
-
     // context.fillStyle = 'red';
     // context.beginPath();
     // context.moveTo(240,240);
     // context.lineTo(300,240);
     // context.lineTo(300,300);
     // context.fill();
-
-   
-   
-
-   
-   
-    eraser.onclick = function(){
-        eraserEnabled = true;
-        action.className = 'action x';
-    }
-    brush.onclick = function(){
-        eraserEnabled = false;
-        action.className = 'action';
-    }
-
-
-
-
+   pen.onclick = function(){
+    eraserEnabled = false;
+    pen.classList.add('active');
+    eraser.classList.remove('active');
+   }
+   eraser.onclick = function(){
+    eraserEnabled = true;
+    eraser.classList.add('active');
+    pen.classList.remove('active');
+   }
+   red.onclick = function(){
+       context.strokeStyle = "red";
+       red.classList.add('active');
+       green.classList.remove('active');
+       yellow.classList.remove('active');
+   }
+   green.onclick = function(){
+        context.strokeStyle = "green"
+        green.classList.add('active');
+        red.classList.remove('active');
+        yellow.classList.remove('active');
+   }
+   yellow.onclick = function(){
+        context.strokeStyle = "yellow";
+        yellow.classList.add('active');
+        green.classList.remove('active');
+        red.classList.remove('active');
+   }
+   thin.onclick = function(){
+       lineWidth = 5
+   }
+  thick.onclick = function(){
+      lineWidth =10
+  }
+  clear.onclick = function(){
+      context.clearRect(0,0,yyy.width,yyy.height)
+  }
+  download.onclick = function(){
+     var url=  yyy.toDataURL('img.png');
+    //  console.log(url);
+     var a = document.createElement('a');
+     document.body.appendChild(a);
+     a.href = url;
+     a.download = '我的画';
+     a.target = "_blank"
+     a.click();
+  }
 /*调用的函数*/
 function setAutocanvas(canvas){
         setCanvasSize();
@@ -93,8 +217,6 @@ function setAutocanvas(canvas){
         canvas.height = pageHeight;
     }
     }
-
-
 function listenToMouse(canvas){
     if(document.body.ontouchstart !== undefined){
         // console.log(canvas);
@@ -134,7 +256,6 @@ function listenToMouse(canvas){
         using = false;
         }
     //     drawCircle(150,150,20)
-
     }else{
         canvas.onmousedown  = function(a){
         
@@ -184,11 +305,12 @@ function listenToMouse(canvas){
     function line(x1,y1,x2,y2){
         context.beginPath();
     context.moveTo(x1,y1);
-    context.lineWidth = 5;
+    context.lineWidth = lineWidth;
     context.lineTo(x2,y2);
     context.stroke();
     context.closePath();
     } 
    }
 </script>
-</html>
+<script src='//at.alicdn.com/t/font_701380_gqxrsoegw301wcdi.js'></script>
+</html> 
