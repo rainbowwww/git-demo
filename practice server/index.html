@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
+</head>
+<body>
+    <h5>您的账户余额是<span id="amount">&&&amount&&&</span>></h5>
+    <button id="button">打钱</button>
+    <!-- <form action="/pay" method="POST" target="result"> 
+     <input type="submit" value="付款">   
+    </form>
+    <iframe src="about:blank" name ='result'  height="200" frameborder="0"></iframe> -->
+
+</body>
+<script>
+  button.addEventListener('click',function(){
+      let script = document.createElement('script')
+      script.src = '/pay'
+      document.body.appendChild(script)
+      script.onload = function(e){
+          alert(sucess)
+          e.currentTarget.remove()
+      }
+      script.onerror = function(){
+          alert(fail) 
+          e.currentTarget.remove()
+      }
+
+    //   var image = document.createElement('img');
+    //   image.src = '/pay'
+    // window.location.reload()
+  })
+</script>
+<script src="./main.js"></script>
+</html>
