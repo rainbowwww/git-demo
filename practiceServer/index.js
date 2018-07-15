@@ -39,13 +39,13 @@ if(path === '/'){
     fs.writeFileSync('./db',newAmount) 
     response.setHeader('Content-Type','application/javascript')
     response.statusCode =200
-    response.write(query.callback+'.call(undefined "success")')
+    response.write('amount.innerText=amount.innerText-1')
     response.end()
 }
 else{
     response.statusCode = 404
     response.setHeader('Content-Type','text/html;charset=utf-8')
-    response.write('找不到对应的路径，你需要自行修改index.js')
+    response.write('找不到对应的路径，你需要自行修改inex.js')
     response.end();
 }
 

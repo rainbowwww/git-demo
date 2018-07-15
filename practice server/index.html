@@ -19,14 +19,14 @@
 <script>
   button.addEventListener('click',function(){
       let script = document.createElement('script')
-      script.src = '/pay'
+      script.src = 'http://jack.com:8002/pay'
       document.body.appendChild(script)
       script.onload = function(e){
-          alert(sucess)
+       
           e.currentTarget.remove()
       }
       script.onerror = function(){
-          alert(fail) 
+        
           e.currentTarget.remove()
       }
 
