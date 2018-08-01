@@ -685,12 +685,12 @@
         for(let i =0; i<aTags.length;i++){
             aTags[i].onclick=function(x){
                 x.preventDefault(); //阻值默认动作
-            //     let a = x.currentTarget ;
-            //    let href =  a.getAttribute('href');  //得到什么，就是什么不做任何处理。浏览器不会处理
-            //    let element = document.querySelector(href);//以获取的href值，来找到对应的元素
-            //    let top = element.offsetTop;//获取元素到窗口顶部的高度
+                let a = x.currentTarget ;
+               let href =  a.getAttribute('href');  //得到什么，就是什么不做任何处理。浏览器不会处理
+               let element = document.querySelector(href);//以获取的href值，来找到对应的元素
+               let top = element.offsetTop;//获取元素到窗口顶部的高度
             //上面四句合成下面一句
-            let top = document.querySelector(x.currentTarget.getAttribute('href')).offsetTop;
+            // let top = document.querySelector(x.currentTarget.getAttribute('href')).offsetTop;
             // window.scrollTo(0,top-80);
             // console.log(a.href); //这个打印出来带有http协议，浏览器处理后的
             // console.log(x.currentTarget);
