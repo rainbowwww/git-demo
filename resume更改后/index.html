@@ -82,7 +82,7 @@
         .downloadAndDescripe>a:hover{ box-shadow: 0px 4px 13px 0px rgba(0, 0, 0, 0.2);  }
         .downloadAndDescripe>p{line-height: 1.8;  font-family: "楷体"; font-size: 18px; }
         .skill{ max-width: 940px; margin:0 auto; margin-top:60px; }
-        .skill>h2{  text-align: center; }
+        .skill>h2,.message>h2{  text-align: center; }
         .skill>nav{ box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.5); }
         .skill>nav>ol{ margin-top: 30px; list-style: none; padding: 42px 50px 10px; background:#fff;  }
         .skill>nav>ol>li{ display: inline-block;/* float: left;也可以采用浮动来实现 */}
@@ -101,7 +101,7 @@
         .skill>nav>ol>.progressFive>div>div{ border:3px solid rgb(230, 104, 106); width: 60%;border-radius:5px ;}
         .skill>nav>ol>.progressSix>div>div{ border:3px solid rgb(230, 104, 106); width: 50%; border-radius: 5px;}
         .work{ margin: 0 auto ;  margin-top: 60px; margin-bottom: 100px;text-align: center; max-width: 720px; }
-        .work>h2{color: #3d4451; font-size: 34px; line-height: 1.2; font-weight: 600; margin-bottom: 30px}
+        .work>h2,.message>h2{color: #3d4451; font-size: 34px; line-height: 1.2; font-weight: 600; margin-bottom: 30px}
         .swiper-container {width: 668px; height:501px; }
         .swiper-slide{ background-color: #fff; }
         .swiper-button-prev, .swiper-button-next{
@@ -115,6 +115,16 @@
         .swiper-button-next{
             right: auto;
             left: 100%;
+        }
+        section.message > ol{
+            max-width: 600px;
+            margin:0 auto;
+            border-top:1px solid #ddd ;
+            background: #F4F4F4;
+        }
+        section.message > ol>li{
+            padding: 16px ;
+            border-bottom:1px solid #ddd;
         }
     </style>
 </head>
@@ -264,14 +274,28 @@
         <div class="swiper-button-next"></div>
     </div>
     </section>
-
+    <section class="message">
+        <h2>留言</h2>
+        <ol id="messageList">
+          
+        </ol>
+        <form id="postMessageForm" style="width:700px,margin:50px auto;">
+            <label for="">姓名</label>
+            <input type="text" name="name">
+            <label for="">内容</label>
+            <input type="text" name="content">
+            <input type="submit" value="提交">
+        </form>
+    </section>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/17.2.0/Tween.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/leancloud-storage@3.9.0/dist/av-min.js"></script>
+
     <script src="./js/auto-slider-up.js"></script>
     <script src="./js/sticky-topbar.js"></script>
     <script src="./js/smoothly-navigation.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.min.js"></script>
     <script src="./js/init-swiper.js"> </script>
-
+    <script src="./js/leancloud.js"></script>
     <script> 
         // let liTags = document.querySelectorAll('nav.menu>ul>li')
         // for(let i=0; i<liTags.length;i++){
